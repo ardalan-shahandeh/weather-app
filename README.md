@@ -73,3 +73,8 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+
+<!-- /
+Create https://home.openweathermap.org/api_keys account for api key
+ -->

@@ -12,7 +12,7 @@
         </div>
 
         <div>
-          <p class="font-extralight text-9xl text-white">58 degree</p>
+          <p class="font-extralight text-9xl text-white">58^</p>
         </div>
       </div>
 
