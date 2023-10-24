@@ -1,20 +1,25 @@
 <script setup lang="ts">
 // https://api.openweathermap.org/data/2.5/weather?q=tehran&appid=09d35a2467a3ae1d799bb641c1fae8b2
 
+const search = ref("Toronto");
+const input = ref("");
+
 const { data: city, error } = useFetch(
-  "https://api.openweathermap.org/data/2.5/weather?q=tehran&units=metric&appid=09d35a2467a3ae1d799bb641c1fae8b2",
+  () =>
+    `https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=09d35a2467a3ae1d799bb641c1fae8b2`,
 );
+
+const handleClick = () => {
+  const formatedSearch = input.value.trim().split(" ").join("+");
+  search.value = formatedSearch;
+  input.value = "";
+};
 </script>
 
 <template>
   <div class="h-screen relative overflow-hidden">
     <img src="" alt="" />
     <div class="absolute w-full h-full top-0 overlay"></div>
-    <pre class="text-left" dir="ltr">
-
-  {{ city }}
-</pre
-    >
     <div class="absolute w-full h-full top-0 p-48">
       <div class="flex justify-between">
         <div>
@@ -28,14 +33,21 @@ const { data: city, error } = useFetch(
 
         <div>
           <p class="font-extralight text-9xl text-white">
-            {{ city.main.temp }}^
+            {{ city.main.temp }}
           </p>
         </div>
       </div>
 
       <div class="mt-20">
-        <input type="text" class="w-1/2 h-10" placeholder="Search a city" />
-        <button class="bg-sky-400 w-20 text-white h-10">Search</button>
+        <input
+          type="text"
+          class="w-1/2 h-10"
+          placeholder="Search a city"
+          v-model="input"
+        />
+        <button class="bg-sky-400 w-20 text-white h-10" @click="handleClick">
+          Search
+        </button>
       </div>
     </div>
   </div>
