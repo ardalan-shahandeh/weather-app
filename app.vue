@@ -2,6 +2,7 @@
 // https://api.openweathermap.org/data/2.5/weather?q=tehran&appid=09d35a2467a3ae1d799bb641c1fae8b2
 
 const cookie = useCookie("city");
+const config = useRuntimeConfig();
 
 if (!cookie.value) cookie.value = "tehran";
 
@@ -25,7 +26,13 @@ const {
 
     try {
       response = await $fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${search.value}&units=metric&appid=09d35a2467a3ae1d799bb641c1fae8b2`,
+        `https://api.openweathermap.org/data/2.5/weather?q=${search.value}`,
+        {
+          params: {
+            units: "metric",
+            appid: config.WEATHER_APP_SECRET,
+          },
+        },
       );
 
       cookie.value = search.value;
